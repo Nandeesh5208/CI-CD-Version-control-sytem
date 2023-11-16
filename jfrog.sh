@@ -18,8 +18,27 @@ sudo cp -pvr /etc/environment "/etc/environment_$(date +%F_%R)"
 echo "JFROG_HOME=/opt/jfrog" >> /etc/environment
 source /etc/environment
 echo $JFROG_HOME
+cd
+
+echo '[Unit]' > /etc/systemd/system/artifactory.service
+echo 'Description=JFrog artifactory service' >> /etc/systemd/system/artifactory.service
+echo 'After=syslog.target network.target' >> /etc/systemd/system/artifactory.service
+
+echo '[Service]' >> /etc/systemd/system/artifactory.service
+echo 'Type=forking' >> /etc/systemd/system/artifactory.service
+
+echo 'ExecStart=/opt/jfrog/app/bin/artifactory.sh start' >> /etc/systemd/system/artifactory.service
+echo 'ExecStop=/opt/jfrog/app/bin/artifactory.sh stop' >> /etc/systemd/system/artifactory.service
+
+echo 'User=root' >> /etc/systemd/system/artifactory.service
+echo 'Group=root' >> /etc/systemd/system/artifactory.service
+echo 'Restart=always' >> /etc/systemd/system/artifactory.service
+
+echo '[Install]' >> /etc/systemd/system/artifactory.service
+echo 'WantedBy=multi-user.target' >> /etc/systemd/system/artifactory.service
 
 cd
+sudo systemctl demon-reload
 sudo systemctl status artifactory.service
 sudo systemctl enable artifactory.service
 sudo systemctl status artifactory.service
