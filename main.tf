@@ -17,14 +17,14 @@ provider "aws" {
 
 
 # Resource
-resource "aws_instance" "nan" {
+resource "aws_instance" "nan_jenkins" {
   ami                  = "ami-0fc5d935ebf8bc3bc"
   instance_type        = "t2.medium"
   key_name             = "nandi"
   subnet_id            = "subnet-0350eaa140b2ac54f"
   security_groups      = ["sg-0368b28396b3f7968"]
   iam_instance_profile = "ec2"
-  user_data            = file("/jenkins.sh")
+  user_data            = file("./jenkins.sh")
 
   #user_data = <<-EOF
   #!/bin/bash
@@ -32,7 +32,7 @@ resource "aws_instance" "nan" {
   #EOF
 
   tags = {
-    Name        = "sonar"
+    Name        = "jenkins"
     Environment = "Dev"
     ProjectName = "Cloud Binary"
     ProjectID   = "2023"
@@ -41,14 +41,14 @@ resource "aws_instance" "nan" {
 }
 
 # Resource
-resource "aws_instance" "nan1" {
+resource "aws_instance" "nan_jfrog" {
   ami                  = "ami-0fc5d935ebf8bc3bc"
   instance_type        = "t2.medium"
   key_name             = "nandi"
   subnet_id            = "subnet-0350eaa140b2ac54f"
   security_groups      = ["sg-0368b28396b3f7968"]
   iam_instance_profile = "ec2"
-  user_data            = file("/jfrog.sh")
+  user_data            = file("./jfrog.sh")
 
   #user_data = <<-EOF
   #!/bin/bash
@@ -65,14 +65,14 @@ resource "aws_instance" "nan1" {
 }
 
 # Resource
-resource "aws_instance" "nan2" {
+resource "aws_instance" "nan_tomcat" {
   ami                  = "ami-0fc5d935ebf8bc3bc"
   instance_type        = "t2.medium"
   key_name             = "nandi"
   subnet_id            = "subnet-0350eaa140b2ac54f"
   security_groups      = ["sg-0368b28396b3f7968"]
   iam_instance_profile = "ec2"
-  user_data            = file("/tomcat.sh")
+  user_data            = file("./tomcat.sh")
 
   #user_data = <<-EOF
   #!/bin/bash
@@ -89,14 +89,14 @@ resource "aws_instance" "nan2" {
 }
 
 # Resource
-resource "aws_instance" "nan3" {
+resource "aws_instance" "nan_sonarqube" {
   ami                  = "ami-0fc5d935ebf8bc3bc"
   instance_type        = "t2.medium"
   key_name             = "nandi"
   subnet_id            = "subnet-0350eaa140b2ac54f"
   security_groups      = ["sg-0368b28396b3f7968"]
   iam_instance_profile = "ec2"
-  user_data            = file("/sonarqube.sh")
+  user_data            = file("./sonarqube.sh")
 
   #user_data = <<-EOF
   #!/bin/bash
